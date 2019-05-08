@@ -12,11 +12,16 @@ public class RocketCountdown {
 	InputStream inputStream;
 
 	public RocketCountdown(int countdownTime) {
+		Application.logger.info("Creating new instance of RocketCountdown.");
+		Application.logger.debug(String.format("creating new instance of RocketCountdown.\ncountdownTime: %s", countdownTime));
 		this.countdownTime = countdownTime;
 	}
 	
 	public void start() throws RocketCountdownAlreadyStartedException {
+		Application.logger.info("Running RocketCountdown.start().");
+		
 		if (this.startingDate != null) {
+			Application.logger.info("startingDate already defined, throwing RocketCountdownAlreadyStartedException.");
 			throw new RocketCountdownAlreadyStartedException();
 		}
 		
@@ -25,7 +30,10 @@ public class RocketCountdown {
 	}
 	
 	public void reset() throws RocketCountdownNotStartedException {
+		Application.logger.info("Running RocketCountdown.reset().");
+		
 		if (this.startingDate == null) {
+			Application.logger.info("startingDate not defined, throwing RocketCountdownNotStartedException.");
 			throw new RocketCountdownNotStartedException();
 		}
 		
@@ -34,19 +42,31 @@ public class RocketCountdown {
 	}
 
 	public Date getStartingDate() {
+		Application.logger.info("Running RocketCountdown.getStartingDate().");
+		Application.logger.debug(String.format("Returning %s in RocketCountdown.getStartingDate().", this.startingDate));
 		return this.startingDate;
 	}
 
 	public Date getExpectedFinishingDate() {
+		Application.logger.info("Running RocketCountdown.getExpectedFinishingDate().");
+		Application.logger.debug(String.format("Returning %s in RocketCountdown.getExpectedFinishingDate().", this.expectedFinishingDate));
 		return this.expectedFinishingDate;
 	}
 
 	public int getCountdownTime() {
+		Application.logger.info("Running RocketCountdown.getCountdownTime().");
+		Application.logger.debug(String.format("Returning %s in RocketCountdown.getCountdownTime().", this.countdownTime));
 		return this.countdownTime;
 	}
 	
 	public double getRemainingTime() {
-		if (this.startingDate == null) return this.countdownTime;
+		Application.logger.info("Running RocketCountdown.getRemainingTime().");
+		
+		if (this.startingDate == null) {
+			int remainingTime = this.countdownTime;
+			Application.logger.debug(String.format("Returning %s in RocketCountdown.getRemainingTime().", remainingTime));
+			return remainingTime;
+		}
 		
 		Date currentTime = new Date();
 		long remainingTimeInMs = this.expectedFinishingDate.getTime() - currentTime.getTime();
@@ -54,6 +74,8 @@ public class RocketCountdown {
 		
 		if (remainingTime < 0) remainingTime = 0;
 
+		Application.logger.debug(String.format("Returning %s in RocketCountdown.getRemainingTime().", remainingTime));
 		return remainingTime;
 	}
+
 }

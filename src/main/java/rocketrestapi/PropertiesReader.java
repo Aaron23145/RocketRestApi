@@ -9,21 +9,32 @@ public class PropertiesReader {
 	private Properties props;
 	
 	public PropertiesReader(String propsFileName) throws PropertiesFileDoesNotExistException, IOException {
+		Application.logger.info("Creating new instance of PropertiesReader.");
+		Application.logger.debug(String.format("Creating new instance of PropertiesReader.\npropsFileName value: %s", propsFileName));
+
 		this.inputStream = getClass().getClassLoader().getResourceAsStream(propsFileName);
 
 		if (this.inputStream == null) {
+			Application.logger.debug("Properties file read from PropertiesFile doesn't exist. Throwing PropertiesFileDoesNotExistException.");
 			throw new PropertiesFileDoesNotExistException(String.format("%s file does not exist.", propsFileName));
 		} else {
 			this.props = new Properties();
-			this.props.load(inputStream);
+			this.props.load(this.inputStream);
+			Application.logger.debug("Properties file read successfully and properties loaded.");
 		}
 	}
 	
 	public String getProperty(String propertyName) throws PropertiesReaderUninitializedException {
+		Application.logger.info("Running PropertiesReader.getProperty().");
+		Application.logger.debug(String.format("Running PropertiesReader.getProperty. propertyName: %s", propertyName));
+
 		if (this.inputStream == null) {
+			Application.logger.warn("Tried to get a property with an uninitialized PropertiesReader. Throwing PropertiesReaderUninitializedException.");
 			throw new PropertiesReaderUninitializedException("PropertiesReader was not properly initialized. invalid inputStream.");
 		} else {
-			return this.props.getProperty(propertyName);
+			String propertyValue = this.props.getProperty(propertyName);
+			Application.logger.debug(String.format("Read %s property and obtained %s value.", propertyName, propertyValue));
+			return propertyValue;
 		}
 	}
 }
