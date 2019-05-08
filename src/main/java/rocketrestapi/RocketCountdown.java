@@ -70,7 +70,7 @@ public class RocketCountdown {
 		Application.logger.info("Running RocketCountdown.getRemainingTime().");
 
 		if (this.startingDate == null) {
-			int remainingTime = this.countdownTime;
+			double remainingTime = (double) this.countdownTime / 1000;
 			Application.logger.debug(String.format("Returning %s in RocketCountdown.getRemainingTime().", remainingTime));
 			return remainingTime;
 		}

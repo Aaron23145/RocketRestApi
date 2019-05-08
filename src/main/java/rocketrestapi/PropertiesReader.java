@@ -38,20 +38,13 @@ public class PropertiesReader {
 	 * Gets a property from the properties file loaded.
 	 * 
 	 * @param propertyName The name of the property to get.
-	 * @throws PropertiesReaderUninitializedException If the PropertiesReader was not initialized successfully and you try to
-	 * 	       get a property.
 	 */
-	public String getProperty(String propertyName) throws PropertiesReaderUninitializedException {
+	public String getProperty(String propertyName) {
 		Application.logger.info("Running PropertiesReader.getProperty().");
 		Application.logger.debug(String.format("Running PropertiesReader.getProperty. propertyName: %s", propertyName));
 
-		if (this.inputStream == null) {
-			Application.logger.warn("Tried to get a property with an uninitialized PropertiesReader. Throwing PropertiesReaderUninitializedException.");
-			throw new PropertiesReaderUninitializedException("PropertiesReader was not properly initialized. invalid inputStream.");
-		} else {
-			String propertyValue = this.props.getProperty(propertyName);
-			Application.logger.debug(String.format("Read %s property and obtained %s value.", propertyName, propertyValue));
-			return propertyValue;
-		}
+		String propertyValue = this.props.getProperty(propertyName);
+		Application.logger.debug(String.format("Read %s property and obtained %s value.", propertyName, propertyValue));
+		return propertyValue;
 	}
 }
