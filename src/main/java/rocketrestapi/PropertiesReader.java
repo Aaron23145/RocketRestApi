@@ -4,10 +4,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/*
+ * Reader that will extract and return the properties values in the configuration file.
+ */
 public class PropertiesReader {
 	private final InputStream inputStream;
 	private Properties props;
-	
+
+	/*
+	 * Initializes the inputStream to be able to read the content of the properties file.
+	 * 
+	 * @param propsFileName The name of the properties file to read.
+	 * @throws PropertiesFileDoesNotExistException If the file is not found.
+	 * @throws IOException If an IO error occurs.
+	 */
 	public PropertiesReader(String propsFileName) throws PropertiesFileDoesNotExistException, IOException {
 		Application.logger.info("Creating new instance of PropertiesReader.");
 		Application.logger.debug(String.format("Creating new instance of PropertiesReader.\npropsFileName value: %s", propsFileName));
@@ -23,7 +33,14 @@ public class PropertiesReader {
 			Application.logger.debug("Properties file read successfully and properties loaded.");
 		}
 	}
-	
+
+	/*
+	 * Gets a property from the properties file loaded.
+	 * 
+	 * @param propertyName The name of the property to get.
+	 * @throws PropertiesReaderUninitializedException If the PropertiesReader was not initialized successfully and you try to
+	 * 	       get a property.
+	 */
 	public String getProperty(String propertyName) throws PropertiesReaderUninitializedException {
 		Application.logger.info("Running PropertiesReader.getProperty().");
 		Application.logger.debug(String.format("Running PropertiesReader.getProperty. propertyName: %s", propertyName));

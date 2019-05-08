@@ -5,24 +5,33 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/*
+ * Mother class for the entire RocketRestApi. It'll store the logger and the rocketController.
+ */
 @SpringBootApplication
 public class Application {
 	public static final Logger logger = LoggerFactory.getLogger(Application.class);
 	public static RocketController rocketController;
-	
+
+	/*
+	 * Sets up the Spring Application and initializes the rocketController.
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 		Application.initializeRocketController();
 	}
 
+	/*
+	 * Initializes the rocketController by reading the application.properties to obtain the countdownTime and create the rocket countdown.
+	 */
 	public static void initializeRocketController() {
 		Application.logger.info("Running Application.initializeRocketController().");
-		
+
 		String propsFileName = PropertiesFile.getPropsFileName();
 		String countdownTimePropName = PropertiesFile.getCountdownTimePropName();
-		
+
 		Application.logger.debug(String.format("Data loaded from PropertiesFile:\npropsFileName: %s\ncountdownTimePropName: %s", propsFileName, countdownTimePropName));
-		
+
 		try {
 			PropertiesReader propertiesReader = new PropertiesReader(propsFileName);
 			String countdownTime = propertiesReader.getProperty(countdownTimePropName);
@@ -40,7 +49,7 @@ public class Application {
 			Application.logger.error("An Exception has ocurred. Aborting.\nDetailed error exception: " + e);
 			System.exit(1);
 		}
-		
+
 		Application.logger.info("RocketController initialized successfully.");
 	}
 }

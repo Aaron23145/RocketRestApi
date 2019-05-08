@@ -7,13 +7,21 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/*
+ * The Rest Controller that will manage and map all requests.
+ */
 @RestController
-public class RestApiController {	
+public class RestApiController {
+	/*
+	 * Starts the rocket countdown. If it has been started it displays an error message.
+	 * 
+	 * @throws ResponseStatusException If the countdown was already started
+	 */
 	@PostMapping("/start")
 	@ResponseStatus(code = HttpStatus.OK, reason = "Countdown started.")
 	public void startCountdown() {
 		Application.logger.info("POST Request received in /start. Running RestApiController.startCountdown().");
-		
+
 		try {
 			Application.rocketController.start();
 			Application.logger.info("Rocket Countdown started.");
@@ -23,11 +31,16 @@ public class RestApiController {
 		}
 	}
 	
+	/*
+	 * Resets the rocket countdown. If it hasn't been started it displays an error message.
+	 * 
+	 * @throws ResponseStatusException If the countdown wasn't already started
+	 */
 	@PostMapping("/reset")
 	@ResponseStatus(code = HttpStatus.OK, reason = "Countdown resetted successfully.")
 	public void resetCountdown() {
 		Application.logger.info("POST Request received in /reset. Running RestApiController.resetCountdown().");
-		
+
 		try {
 			Application.rocketController.reset();
 			Application.logger.info("Rocked Countdown resetted.");
