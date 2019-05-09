@@ -43,6 +43,8 @@ or if you're on Windows:
 mvnw.cmd sprint-boot:run
 ```
 
+Then the app will start in http://localhost:8080. Take a look at the endpoints section to find out which paths you can make requests.
+
 ## Running Tests
 
 To run the tests you'll need JDK 8 installed. You may also need to define the JAVA_HOME environment variable pointing to your JDK installation.
