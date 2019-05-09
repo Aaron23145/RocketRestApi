@@ -53,12 +53,12 @@ public class RestApiController {
 	@GetMapping("/status")
 	public Response<RocketStatus> getRocketStatus() {
 		Application.logger.info("GET Request received in /status. Running RestApiController.getRocketStatus().");
-		return new Response<>(Application.rocketController.getStatus(), "/status");
+		return new Response<>(Application.rocketController.getStatus(), "/status/");
 	}
 
 	@GetMapping("/countdown")
 	public Response<RocketCountdown> getCountdown() {
 		Application.logger.info("GET Request received in /countdown. Running RestApiController.getCountdown().");
-		return new Response<>(Application.rocketController.getCountdown(), "/countdown");
+		return new Response<>(Application.rocketController.getCountdown(), "/countdown/");
 	}
 }
