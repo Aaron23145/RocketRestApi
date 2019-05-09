@@ -29,7 +29,9 @@ Rest Api that manages a Rocket Countdown and allows you to control when to start
 
 ## Running App
 
-To run the app you'll need JDK 8 installed. Just execute the following command on Linux while being in the root folder:
+To run the app you'll need JDK 8 installed. You may also need to define the JAVA_HOME environment variable pointing to your JDK installation.
+
+Just execute the following command on Linux while being in the root folder:
 
 ```sh
 ./mvnw spring-boot:run
@@ -37,11 +39,15 @@ To run the app you'll need JDK 8 installed. Just execute the following command o
 
 or if you're on Windows:
 
-TODO
+```sh
+mvnw.cmd sprint-boot:run
+```
 
 ## Running Tests
 
-To run the tests you'll need JDK 8 installed. Just execute the following command on Linux while being in the root folder:
+To run the tests you'll need JDK 8 installed. You may also need to define the JAVA_HOME environment variable pointing to your JDK installation.
+
+Just execute the following command on Linux while being in the root folder:
 
 ```sh
 ./mvnw clean test
@@ -49,4 +55,6 @@ To run the tests you'll need JDK 8 installed. Just execute the following command
 
 or if you're on Windows:
 
-TODO
+```sh
+mvnw.cmd clean test
+```
