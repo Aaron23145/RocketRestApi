@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 /*
  * The Rest Controller that will manage and map all requests.
@@ -17,6 +18,7 @@ public class RestApiController {
 	 * 
 	 * @throws ResponseStatusException If the countdown was already started
 	 */
+	@CrossOrigin()
 	@PostMapping("/start")
 	@ResponseStatus(code = HttpStatus.OK, reason = "Countdown started.")
 	public void startCountdown() {
@@ -36,6 +38,7 @@ public class RestApiController {
 	 * 
 	 * @throws ResponseStatusException If the countdown wasn't already started
 	 */
+	@CrossOrigin()
 	@PostMapping("/reset")
 	@ResponseStatus(code = HttpStatus.OK, reason = "Countdown resetted successfully.")
 	public void resetCountdown() {
@@ -50,12 +53,14 @@ public class RestApiController {
 		}
 	}
 
+	@CrossOrigin()
 	@GetMapping("/status")
 	public Response<RocketStatus> getRocketStatus() {
 		Application.logger.info("GET Request received in /status. Running RestApiController.getRocketStatus().");
 		return new Response<>(Application.rocketController.getStatus(), "/status/");
 	}
 
+	@CrossOrigin()
 	@GetMapping("/countdown")
 	public Response<RocketCountdown> getCountdown() {
 		Application.logger.info("GET Request received in /countdown. Running RestApiController.getCountdown().");
